@@ -13,7 +13,8 @@ theme:
 nav:
   - Home: index.md
   - Workflow: workflow.md
-  - Methods: methods.md
+  - Sequencing strategies: strategies.md
+  - Computational methods: methods.md
   - Specimens: specimens.md
   - Decision guides: decision-guides.md
   - Evidence standards: evidence-standards.md

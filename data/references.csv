@@ -1,4 +1,20 @@
-reference_id,doi,pmid,title,year,topic,evidence_type,date_added,review_status
-R001,10.1038/s41587-023-01953-y,,Identification of mobile genetic elements with geNomad,2023,Viral identification,Primary method paper,2026-11-19,Screened
-R002,10.1038/s41587-020-00774-7,33349699,CheckV assesses the quality and completeness of metagenome-assembled viral genomes,2021,Genome quality,Primary method paper,2026-11-19,Screened
-R003,,,Phage-inclusive profiling of human gut microbiomes with Phanta,,Read-based profiling,Primary method paper,2026-11-19,Needs bibliographic verification
+reference_id,doi,pmid,title,year,topic,evidence_type,software_url,review_section,date_added,review_status
+R001,,,BBTools / Seal documentation,,Host-read removal,Tool documentation,https://github.com/BioInfoTools/BBMap,3.a,2026-11-19,Needs bibliographic benchmark
+R002,10.1099/mgen.0.000393,32558637,Evaluation of methods for detecting human reads in microbial sequencing datasets,2020,Host-read removal,Independent benchmark,,3.a,2026-11-19,Verified in manuscript
+R003,10.1016/j.crmeth.2025.101218,,Benchmarking of Human Read Removal Strategies for Viral and Microbial Metagenomics,2025,Host-read removal,Benchmark,,3.a,2026-11-19,Verify final bibliographic record
+R004,,38039142,Hostile: accurate decontamination of microbial host sequences,2023,Host-read removal,Method and benchmark,https://github.com/bede/hostile,3.a,2026-11-19,Verified in manuscript
+R005,10.1093/nargab/lqaf125,,nf-core/detaxizer: A Benchmarking Study for Decontamination from Human Sequences,2025,Host-read removal,Method and benchmark,https://github.com/nf-core/detaxizer,3.a,2026-11-19,Verify final bibliographic record
+R006,,,Phage-inclusive profiling of human gut microbiomes with Phanta,2023,Read-based profiling,Primary method paper,https://github.com/bhattlab/phanta,3.b,2026-11-19,Needs DOI/PMID verification
+R007,10.1186/s13059-019-1891-0,,Improved metagenomic analysis with Kraken 2,2019,Taxonomic classification,Primary method paper,https://github.com/DerrickWood/kraken2,3.b;3.d,2026-11-19,Needs PMID verification
+R008,,,metaSPAdes: a new versatile metagenomic assembler,2017,Assembly,Primary method paper,https://github.com/ablab/spades,3.b;3.c,2026-11-19,Needs DOI/PMID verification
+R009,,,MEGAHIT: an ultra-fast single-node solution for large and complex metagenomics assembly,2015,Assembly,Primary method paper,https://github.com/voutcn/megahit,3.b;3.c,2026-11-19,Needs DOI/PMID verification
+R010,10.1038/s41587-023-01953-y,,Identification of mobile genetic elements with geNomad,2023,Viral identification,Primary method paper,https://github.com/apcamargo/genomad,3.b;3.d,2026-11-19,DOI from manuscript
+R011,,33522966,"VirSorter2: a multi-classifier, expert-guided approach to detect diverse DNA and RNA viruses",2021,Viral identification,Primary method paper,https://github.com/jiarong/VirSorter2,3.d,2026-11-19,PMID from manuscript
+R012,,32522236,"VIBRANT: automated recovery, annotation and curation of microbial viruses",2020,Viral identification and annotation,Primary method paper,https://github.com/AnantharamanLab/VIBRANT,3.d,2026-11-19,PMID from manuscript
+R013,,34084563,Identifying viruses from metagenomic data using deep learning,2020,Machine-learning viral identification,Primary method paper,https://github.com/jessieren/DeepVirFinder,3.d;3.e,2026-11-19,PMID from manuscript
+R014,10.1038/s41587-020-00774-7,33349699,CheckV assesses the quality and completeness of metagenome-assembled viral genomes,2021,Genome quality,Primary method paper,https://bitbucket.org/berkeleylab/checkv,3.b;3.c;3.h,2026-11-19,Verified in manuscript
+R015,,,Vclust: fast and accurate clustering of viral genomes,2024,Viral clustering,Primary method/tool paper,https://github.com/refresh-bio/vclust,3.h,2026-11-19,Needs bibliography verification
+R016,,,iPHoP: an integrated machine learning framework to maximize host prediction for metagenome-derived viruses,2023,Virus-host prediction,Primary method paper,https://bitbucket.org/srouxjgi/iphop,3.h;5.d,2026-11-19,Needs DOI/PMID verification
+R017,10.1038/s41587-023-01773-0,37156916,Fast and accurate protein structure search with Foldseek,2023,Structure search,Primary method paper,https://github.com/steineggerlab/foldseek,3.f;5.e,2026-11-19,PMID from manuscript
+R018,,,Highly accurate protein structure prediction with AlphaFold,2021,Structure prediction,Primary method paper,https://github.com/google-deepmind/alphafold,3.f;5.e,2026-11-19,Needs DOI/PMID verification
+R019,,,Pharokka: a fast scalable bacteriophage annotation tool,2023,Phage annotation,Primary method paper,https://github.com/gbouras13/pharokka,3.h;5.e,2026-11-19,Needs DOI/PMID verification
