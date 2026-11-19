@@ -12,3 +12,4 @@ jobs:
         with:
           python-version: '3.12'
       - run: python scripts/validate_data.py
+      - run: python scripts/build_tables.py
