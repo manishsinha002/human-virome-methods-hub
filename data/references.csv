@@ -1,0 +1,4 @@
+reference_id,doi,pmid,title,year,topic,evidence_type,date_added,review_status
+R001,10.1038/s41587-023-01953-y,,Identification of mobile genetic elements with geNomad,2023,Viral identification,Primary method paper,2026-11-19,Screened
+R002,10.1038/s41587-020-00774-7,33349699,CheckV assesses the quality and completeness of metagenome-assembled viral genomes,2021,Genome quality,Primary method paper,2026-11-19,Screened
+R003,,,Phage-inclusive profiling of human gut microbiomes with Phanta,,Read-based profiling,Primary method paper,2026-11-19,Needs bibliographic verification

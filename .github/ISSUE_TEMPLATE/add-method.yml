@@ -1,0 +1,17 @@
+name: Propose a method
+description: Add a method or tool with supporting evidence
+title: "[Method]: "
+labels: [method-proposal]
+body:
+  - type: input
+    id: name
+    attributes: {label: Method or tool name}
+    validations: {required: true}
+  - type: textarea
+    id: evidence
+    attributes: {label: Supporting evidence, description: Include DOI, PMID, benchmark, and relevant specimen type.}
+    validations: {required: true}
+  - type: textarea
+    id: fit
+    attributes: {label: Human-virome use case and limitations}
+    validations: {required: true}

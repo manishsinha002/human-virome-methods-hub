@@ -1,0 +1,3 @@
+record_id,specimen,method_or_strategy,viral_fraction_recovered,viral_fraction_depleted,best_use,limitation,evidence_status,reference_ids,last_reviewed
+S001,Stool,Virus-like-particle enrichment,Particle-associated extracellular viruses,Intracellular and integrated viral sequences,Virion-focused community analysis,Filtration and nuclease treatment can bias genome and particle recovery,Review-derived; benchmark references pending,,2026-11-19
+S002,Plasma or serum,Host-depletion plus deep sequencing,Circulating viral nucleic acids,Protocol-dependent,Low-biomass surveillance,High contamination risk and limited absolute sensitivity,Review-derived; benchmark references pending,,2026-11-19
