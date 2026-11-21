@@ -4,7 +4,7 @@ Human virome analysis is not one universal pipeline. Specimen biology, laborator
 
 <div class="workflow-intro">
   <strong>How to explore</strong>
-  <span>Select any stage or substep. The detail panel explains its purpose, outputs, caveats, and tools or references connected to the repository's curated methods data.</span>
+  <span>Select any stage or substep. Its purpose, outputs, caveats, tools, and references appear in the detail panel beside the map on wide screens and below it on smaller screens. Arrows show the sequence and the two complementary analysis routes.</span>
 </div>
 
 <div class="workflow-app" data-workflow>
@@ -18,19 +18,16 @@ Human virome analysis is not one universal pipeline. Specimen biology, laborator
           <span class="workflow-node-title">Question, specimen and controls</span>
           <span class="workflow-node-subtitle">Define what can be observed</span>
         </button>
-        <span class="workflow-connector" aria-hidden="true">→</span>
         <button class="workflow-node" type="button" data-workflow-node="sample-prep" aria-pressed="false">
           <span class="workflow-node-number">02</span>
           <span class="workflow-node-title">Recovery and sequencing strategy</span>
           <span class="workflow-node-subtitle">Choose fractions and library approach</span>
         </button>
-        <span class="workflow-connector" aria-hidden="true">→</span>
         <button class="workflow-node" type="button" data-workflow-node="read-qc" aria-pressed="false">
           <span class="workflow-node-number">03</span>
           <span class="workflow-node-title">Read quality control</span>
           <span class="workflow-node-subtitle">Inspect, trim and retain provenance</span>
         </button>
-        <span class="workflow-connector" aria-hidden="true">→</span>
         <button class="workflow-node" type="button" data-workflow-node="host-removal" aria-pressed="false">
           <span class="workflow-node-number">04</span>
           <span class="workflow-node-title">Human-read removal</span>
