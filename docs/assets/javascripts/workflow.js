@@ -172,9 +172,15 @@
 
   if (window.document$ && typeof window.document$.subscribe === "function") {
     window.document$.subscribe(initializeWorkflows);
-  } else if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initializeWorkflows, {once: true});
-  } else {
+  }
+
+  if (document.body) {
+    new MutationObserver(initializeWorkflows).observe(document.body, {
+      childList: true,
+      subtree: true,
+    });
     initializeWorkflows();
+  } else {
+    document.addEventListener("DOMContentLoaded", initializeWorkflows, {once: true});
   }
 })();
