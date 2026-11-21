@@ -12,7 +12,7 @@ This resource complements broad software catalogues by focusing on method–spec
 
 After GitHub Pages is enabled, the project site will be available at:
 
-[https://manishsinha002.github.io/human-virome-methods-hub/](https://manishsinha002.github.io/human-virome-methods-hub/)
+[https://virome-hub.github.io/human-virome-methods-hub/](https://virome-hub.github.io/human-virome-methods-hub/)
 
 ## Local preview
 

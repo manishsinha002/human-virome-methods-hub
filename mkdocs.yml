@@ -1,8 +1,8 @@
 site_name: Human Virome Methods Hub
 site_description: Evidence-linked guidance for human viral metagenomics
-site_url: https://manishsinha002.github.io/human-virome-methods-hub/
-repo_url: https://github.com/manishsinha002/human-virome-methods-hub
-repo_name: manishsinha002/human-virome-methods-hub
+site_url: https://virome-hub.github.io/human-virome-methods-hub/
+repo_url: https://github.com/virome-hub/human-virome-methods-hub
+repo_name: virome-hub/human-virome-methods-hub
 theme:
   name: material
   features:

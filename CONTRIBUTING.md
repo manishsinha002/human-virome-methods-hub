@@ -9,7 +9,7 @@
 
 ## Contribution routes
 - **Correction:** open an issue with the affected record and supporting reference.
-- **New method or tool:** [submit a proposal](https://github.com/manishsinha002/human-virome-methods-hub/issues/new?template=add-method.yml) for maintainer review.
+- **New method or tool:** [submit a proposal](https://github.com/virome-hub/human-virome-methods-hub/issues/new?template=add-method.yml) for maintainer review.
 - **Data update:** edit the relevant CSV and open a pull request.
 
 ## Tool proposal review
