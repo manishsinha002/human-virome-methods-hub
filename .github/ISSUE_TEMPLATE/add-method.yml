@@ -7,11 +7,18 @@ body:
     id: name
     attributes: {label: Method or tool name}
     validations: {required: true}
+  - type: input
+    id: source
+    attributes: {label: Project or documentation URL and version, description: Include a release or access date if available.}
   - type: textarea
     id: evidence
     attributes: {label: Supporting evidence, description: Include DOI, PMID, benchmark, and relevant specimen type.}
     validations: {required: true}
   - type: textarea
     id: fit
-    attributes: {label: Human-virome use case and limitations}
+    attributes: {label: Human-virome use case and limitations, description: Describe the analysis stage, intended use, and known limitations.}
+    validations: {required: true}
+  - type: textarea
+    id: conflict
+    attributes: {label: Conflict-of-interest disclosure, description: Disclose relevant affiliations, funding, or other conflicts. Enter "None" if not applicable.}
     validations: {required: true}

@@ -9,7 +9,10 @@
 
 ## Contribution routes
 - **Correction:** open an issue with the affected record and supporting reference.
-- **New method:** use the method proposal issue form.
+- **New method or tool:** [submit a proposal](https://github.com/manishsinha002/human-virome-methods-hub/issues/new?template=add-method.yml) for maintainer review.
 - **Data update:** edit the relevant CSV and open a pull request.
+
+## Tool proposal review
+Submitting a proposal creates a GitHub issue for the maintainers; it does not change the website directly. Maintainers review its relevance and evidence and may ask questions or decline it. If accepted, a maintainer updates the structured data in a pull request. The pull request must pass schema validation, and merging it to `main` triggers the website build and deployment. GitHub sends issue notifications according to each maintainer's repository notification settings.
 
 All pull requests must pass schema validation before review.

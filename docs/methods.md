@@ -2,6 +2,8 @@
 
 This matrix supports the review but is not a general catalogue. It emphasizes method fit, evidentiary limits, and human-virome interpretation.
 
+Have a tool to suggest? [Submit a proposal for maintainer review](https://github.com/manishsinha002/human-virome-methods-hub/issues/new?template=add-method.yml).
+
 <div class="table-scroll"><table><thead><tr>
 <th>Method</th>
 <th>Category</th>
