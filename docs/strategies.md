@@ -1,6 +1,8 @@
-# Sequencing strategy matrix
+# Sequencing strategies
 
-This is the living-resource version of manuscript Table 1.
+Sequencing strategy determines which viral fractions are observable and how well samples support detection, genome recovery, and interpretation. Compare the trade-offs below in the context of your specimen and research question. On narrower screens, scroll the table horizontally to see every column.
+
+<div class="strategies-table">
 
 <table><thead><tr>
 <th>Strategy</th>
@@ -59,3 +61,5 @@ This is the living-resource version of manuscript Table 1.
 <td>Reference-quality genome reconstruction, strain-resolved analysis and complex or highly microdiverse viral populations</td>
 </tr>
 </tbody></table>
+
+</div>

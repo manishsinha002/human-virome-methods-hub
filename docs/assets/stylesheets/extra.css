@@ -118,6 +118,19 @@
   font-weight: 700;
 }
 
+.md-typeset .strategies-table {
+  margin: 1.5rem 0 2.5rem;
+}
+
+.md-typeset .strategies-table table {
+  min-width: 1200px;
+}
+
+.md-typeset .strategies-table td:first-child {
+  min-width: 190px;
+  font-weight: 700;
+}
+
 .home-hero {
   position: relative;
   display: grid;

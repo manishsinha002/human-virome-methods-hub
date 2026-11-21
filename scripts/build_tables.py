@@ -31,6 +31,6 @@ text='# Computational methods matrix\n\nCompare tools by their primary analysis 
 (ROOT/'docs/methods.md').write_text(text,encoding='utf-8')
 strategies=read('strategies.csv')
 strategy_cols=[('strategy','Strategy'),('principal_fraction_measured','Principal fraction measured'),('strengths','Strengths'),('major_limitations_and_blind_spots','Blind spots'),('best_suited_applications','Best-suited applications')]
-text='# Sequencing strategy matrix\n\nThis is the living-resource version of manuscript Table 1.\n\n'+table(strategies,strategy_cols)+'\n'
+text='# Sequencing strategies\n\nSequencing strategy determines which viral fractions are observable and how well samples support detection, genome recovery, and interpretation. Compare the trade-offs below in the context of your specimen and research question. On narrower screens, scroll the table horizontally to see every column.\n\n<div class="strategies-table">\n\n'+table(strategies,strategy_cols)+'\n\n</div>\n'
 (ROOT/'docs/strategies.md').write_text(text,encoding='utf-8')
 print(f'Built {len(methods)} method rows and {len(strategies)} strategy rows.')
