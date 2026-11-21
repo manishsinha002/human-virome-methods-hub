@@ -2,7 +2,7 @@
 
 This is the living-resource version of manuscript Table 1.
 
-<div class="table-scroll"><table><thead><tr>
+<table><thead><tr>
 <th>Strategy</th>
 <th>Principal fraction measured</th>
 <th>Strengths</th>
@@ -58,4 +58,4 @@ This is the living-resource version of manuscript Table 1.
 <td>Requires parallel library preparation and sequencing; increases cost, workflow complexity and computational demands</td>
 <td>Reference-quality genome reconstruction, strain-resolved analysis and complex or highly microdiverse viral populations</td>
 </tr>
-</tbody></table></div>
+</tbody></table>

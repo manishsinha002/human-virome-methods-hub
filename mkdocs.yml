@@ -5,27 +5,39 @@ repo_url: https://github.com/virome-hub/human-virome-methods-hub
 repo_name: virome-hub/human-virome-methods-hub
 theme:
   name: material
+  palette:
+    - scheme: default
+      primary: teal
+      accent: amber
   features:
     - navigation.tabs
     - navigation.sections
+    - navigation.top
+    - navigation.footer
+    - navigation.instant
     - search.suggest
     - content.code.copy
 nav:
   - Home: index.md
-  - Workflow: workflow.md
-  - Sequencing strategies: strategies.md
-  - Computational methods: methods.md
+  - Methods:
+      - Workflow: workflow.md
+      - Sequencing strategies: strategies.md
+      - Computational methods: methods.md
+  - Study design:
+      - Specimens: specimens.md
+      - Decision guides: decision-guides.md
+      - Evidence standards: evidence-standards.md
+      - Benchmarks: benchmarks.md
+      - Reporting checklist: reporting-checklist.md
   - Suggest a tool: suggest-tool.md
-  - Specimens: specimens.md
-  - Decision guides: decision-guides.md
-  - Evidence standards: evidence-standards.md
-  - Benchmarks: benchmarks.md
-  - Reporting checklist: reporting-checklist.md
-  - Literature: literature.md
-  - Contribute: contribute.md
-  - Changelog: changelog.md
+  - Resources:
+      - Literature: literature.md
+      - Contribute: contribute.md
+      - Changelog: changelog.md
 plugins:
   - search
+extra_css:
+  - assets/stylesheets/extra.css
 markdown_extensions:
   - admonition
   - tables

@@ -1,12 +1,13 @@
 # Computational methods matrix
 
-This matrix supports the review but is not a general catalogue. It emphasizes method fit, evidentiary limits, and human-virome interpretation.
+Compare tools by their primary analysis role. Category headings group the methods; the table focuses on input, fit, limitations, and evidentiary boundaries. These groupings are not endorsements. On narrower screens, scroll a table horizontally to see every column. For a tool to suggest, [submit a proposal for maintainer review](https://github.com/virome-hub/human-virome-methods-hub/issues/new?template=add-method.yml).
 
-Have a tool to suggest? [Submit a proposal for maintainer review](https://github.com/virome-hub/human-virome-methods-hub/issues/new?template=add-method.yml).
+## Human-read removal
 
-<div class="table-scroll"><table><thead><tr>
-<th>Method</th>
-<th>Category</th>
+<div class="methods-table">
+
+<table><thead><tr>
+<th>Method/tool</th>
 <th>Input</th>
 <th>Main strength</th>
 <th>Main limitation</th>
@@ -17,7 +18,6 @@ Have a tool to suggest? [Submit a proposal for maintainer review](https://github
 </tr></thead><tbody>
 <tr>
 <td>Seal (BBTools)</td>
-<td>Host-read removal</td>
 <td>Quality-controlled reads</td>
 <td>Fast k-mer-based binning</td>
 <td>Performance depends on reference composition and parameterization; less independently benchmarked in viromics than major aligners</td>
@@ -28,7 +28,6 @@ Have a tool to suggest? [Submit a proposal for maintainer review](https://github
 </tr>
 <tr>
 <td>Bowtie2</td>
-<td>Host-read removal</td>
 <td>Quality-controlled reads</td>
 <td>High precision and configurable sensitivity</td>
 <td>High-sensitivity modes increase runtime; reference and pairing choices affect removal</td>
@@ -39,7 +38,6 @@ Have a tool to suggest? [Submit a proposal for maintainer review](https://github
 </tr>
 <tr>
 <td>Minimap2</td>
-<td>Host-read removal</td>
 <td>Reads</td>
 <td>Fast alignment across read lengths</td>
 <td>Sensitivity depends on preset and reference; host-like viral sequence may be removed</td>
@@ -50,7 +48,6 @@ Have a tool to suggest? [Submit a proposal for maintainer review](https://github
 </tr>
 <tr>
 <td>Hostile</td>
-<td>Host-read removal</td>
 <td>Reads</td>
 <td>High host-read removal with strong microbial-read retention</td>
 <td>Still depends on reference masking and cannot preserve every host-like viral signal</td>
@@ -60,8 +57,7 @@ Have a tool to suggest? [Submit a proposal for maintainer review](https://github
 <td>3.a</td>
 </tr>
 <tr>
-<td>SRA Human Scrubber (HRRT)</td>
-<td>Host-read removal</td>
+<td>SRA Human Read Removal Tool (SRA Human Scrubber)</td>
 <td>Reads</td>
 <td>Operationally aligned with SRA public-deposition screening</td>
 <td>Not optimized to retain every microbial or host-like viral read</td>
@@ -72,7 +68,6 @@ Have a tool to suggest? [Submit a proposal for maintainer review](https://github
 </tr>
 <tr>
 <td>nf-core/detaxizer</td>
-<td>Host-read removal</td>
 <td>Reads</td>
 <td>Containerized, reproducible taxon-removal workflow</td>
 <td>Recall and false-positive balance depends strongly on database and chained passes</td>
@@ -81,9 +76,26 @@ Have a tool to suggest? [Submit a proposal for maintainer review](https://github
 <td>Primary benchmarking study</td>
 <td>3.a</td>
 </tr>
+</tbody></table>
+
+</div>
+
+## Read-based profiling
+
+<div class="methods-table">
+
+<table><thead><tr>
+<th>Method/tool</th>
+<th>Input</th>
+<th>Main strength</th>
+<th>Main limitation</th>
+<th>Best use</th>
+<th>Do not infer</th>
+<th>Evidence</th>
+<th>Review section</th>
+</tr></thead><tbody>
 <tr>
 <td>Phanta</td>
-<td>Read-based profiling</td>
 <td>Quality-controlled reads</td>
 <td>Coverage-aware profiling improves specificity over raw read counts</td>
 <td>Cannot discover viruses absent from the reference; database composition controls labels</td>
@@ -94,7 +106,6 @@ Have a tool to suggest? [Submit a proposal for maintainer review](https://github
 </tr>
 <tr>
 <td>Kraken2</td>
-<td>Read-based classification</td>
 <td>Reads or contigs</td>
 <td>Very fast and scalable</td>
 <td>Closely related taxa and database contamination can generate false positives; raw counts do not establish genome coverage</td>
@@ -104,8 +115,35 @@ Have a tool to suggest? [Submit a proposal for maintainer review](https://github
 <td>3.b;3.d</td>
 </tr>
 <tr>
+<td>BAQLaVa</td>
+<td>Quality-controlled reads</td>
+<td>Combines nucleotide and translated searches to profile reference-represented viral genome bins</td>
+<td>Database representation and bacterial-depletion choices affect detection; profiles do not establish complete genomes or active infection</td>
+<td>Read-based screening and profiling of known/reference-represented viruses in microbial communities</td>
+<td>Discovery or confirmation of a novel virus, complete genome recovery, or active infection from profile output alone</td>
+<td>Primary method preprint and tool documentation</td>
+<td>3.b;3.d</td>
+</tr>
+</tbody></table>
+
+</div>
+
+## Assembly
+
+<div class="methods-table">
+
+<table><thead><tr>
+<th>Method/tool</th>
+<th>Input</th>
+<th>Main strength</th>
+<th>Main limitation</th>
+<th>Best use</th>
+<th>Do not infer</th>
+<th>Evidence</th>
+<th>Review section</th>
+</tr></thead><tbody>
+<tr>
 <td>metaSPAdes</td>
-<td>Metagenomic assembly</td>
 <td>Quality-controlled reads</td>
 <td>Widely used de novo assembler for complex communities</td>
 <td>Microdiversity, repeats and uneven coverage fragment or collapse viral genomes</td>
@@ -116,7 +154,6 @@ Have a tool to suggest? [Submit a proposal for maintainer review](https://github
 </tr>
 <tr>
 <td>MEGAHIT</td>
-<td>Metagenomic assembly</td>
 <td>Quality-controlled reads</td>
 <td>Fast and memory-efficient for large datasets</td>
 <td>Does not eliminate fragmentation, collapse or chimeric assembly risks</td>
@@ -126,8 +163,35 @@ Have a tool to suggest? [Submit a proposal for maintainer review](https://github
 <td>3.b;3.c</td>
 </tr>
 <tr>
+<td>metaviralSPAdes</td>
+<td>Metagenomic short reads</td>
+<td>Specialized assembly approach for recovering viral sequences from metagenomic data</td>
+<td>Assembly quality depends on read quality, depth, strain diversity, and genomic repeats; viral origin is not established by assembly alone</td>
+<td>De novo viral genome assembly from metagenomic short reads</td>
+<td>A contig is viral, complete, non-chimeric, or biologically active based on assembly alone</td>
+<td>Primary method paper; human-virome context-specific benchmarking needed</td>
+<td>3.b;3.c</td>
+</tr>
+</tbody></table>
+
+</div>
+
+## Viral-sequence identification
+
+<div class="methods-table">
+
+<table><thead><tr>
+<th>Method/tool</th>
+<th>Input</th>
+<th>Main strength</th>
+<th>Main limitation</th>
+<th>Best use</th>
+<th>Do not infer</th>
+<th>Evidence</th>
+<th>Review section</th>
+</tr></thead><tbody>
+<tr>
 <td>geNomad</td>
-<td>Viral identification</td>
 <td>Assembled contigs or genomes</td>
 <td>Integrated marker, gene-content and neural-network evidence</td>
 <td>Short or atypical elements may lack decisive features; taxonomy is often above species level</td>
@@ -138,7 +202,6 @@ Have a tool to suggest? [Submit a proposal for maintainer review](https://github
 </tr>
 <tr>
 <td>VirSorter2</td>
-<td>Viral identification</td>
 <td>Assembled contigs</td>
 <td>Multi-classifier framework across diverse viral groups</td>
 <td>False positives increase without post-filtering; performance varies by group and contig length</td>
@@ -149,7 +212,6 @@ Have a tool to suggest? [Submit a proposal for maintainer review](https://github
 </tr>
 <tr>
 <td>VIBRANT</td>
-<td>Viral identification and annotation</td>
 <td>Assembled contigs</td>
 <td>Combines viral identification with protein annotation</td>
 <td>Database and training representation affect sensitivity; functional calls remain putative</td>
@@ -160,7 +222,6 @@ Have a tool to suggest? [Submit a proposal for maintainer review](https://github
 </tr>
 <tr>
 <td>DeepVirFinder</td>
-<td>Sequence-composition ML</td>
 <td>Contigs</td>
 <td>Alignment-free detection of divergent and shorter sequences</td>
 <td>Probabilistic score is sensitive to training data, length and atypical cellular sequences</td>
@@ -169,9 +230,26 @@ Have a tool to suggest? [Submit a proposal for maintainer review](https://github
 <td>Primary method paper; independent comparisons available</td>
 <td>3.d;3.e</td>
 </tr>
+</tbody></table>
+
+</div>
+
+## Genome quality and clustering
+
+<div class="methods-table">
+
+<table><thead><tr>
+<th>Method/tool</th>
+<th>Input</th>
+<th>Main strength</th>
+<th>Main limitation</th>
+<th>Best use</th>
+<th>Do not infer</th>
+<th>Evidence</th>
+<th>Review section</th>
+</tr></thead><tbody>
 <tr>
 <td>CheckV</td>
-<td>Viral genome quality</td>
 <td>Predicted viral contigs</td>
 <td>Standardized estimates and host-boundary support</td>
 <td>Novel groups may receive uncertain completeness estimates; not a viral detector</td>
@@ -182,7 +260,6 @@ Have a tool to suggest? [Submit a proposal for maintainer review](https://github
 </tr>
 <tr>
 <td>Vclust</td>
-<td>Viral genome clustering</td>
 <td>Viral contigs/genomes</td>
 <td>Fast large-scale ANI and clustering</td>
 <td>Cluster quality depends on input completeness, alignment coverage and thresholds</td>
@@ -191,9 +268,26 @@ Have a tool to suggest? [Submit a proposal for maintainer review](https://github
 <td>Primary method/tool evidence</td>
 <td>3.h</td>
 </tr>
+</tbody></table>
+
+</div>
+
+## Virus–host and functional interpretation
+
+<div class="methods-table">
+
+<table><thead><tr>
+<th>Method/tool</th>
+<th>Input</th>
+<th>Main strength</th>
+<th>Main limitation</th>
+<th>Best use</th>
+<th>Do not infer</th>
+<th>Evidence</th>
+<th>Review section</th>
+</tr></thead><tbody>
 <tr>
 <td>iPHoP</td>
-<td>Virus-host prediction</td>
 <td>Viral genomes/contigs plus host references</td>
 <td>Integrates multiple host-prediction signals</td>
 <td>Accuracy and taxonomic resolution vary; database coverage limits hosts</td>
@@ -204,7 +298,6 @@ Have a tool to suggest? [Submit a proposal for maintainer review](https://github
 </tr>
 <tr>
 <td>Foldseek</td>
-<td>Structure similarity search</td>
 <td>Predicted or experimental protein structures; optionally sequences</td>
 <td>Sensitive remote-homology search beyond sequence similarity</td>
 <td>A structural match does not prove exact function, viral origin or contig authenticity</td>
@@ -215,7 +308,6 @@ Have a tool to suggest? [Submit a proposal for maintainer review](https://github
 </tr>
 <tr>
 <td>AlphaFold</td>
-<td>Protein structure prediction</td>
 <td>Protein sequences</td>
 <td>Provides structural hypotheses for proteins lacking homologs</td>
 <td>pLDDT measures local structural confidence, not functional correctness; disordered regions may remain unresolved</td>
@@ -226,7 +318,6 @@ Have a tool to suggest? [Submit a proposal for maintainer review](https://github
 </tr>
 <tr>
 <td>Pharokka</td>
-<td>Phage genome annotation</td>
 <td>Phage genomes/contigs</td>
 <td>Rapid standardized phage annotation</td>
 <td>Unknown proteins remain hypothetical; annotations inherit database errors</td>
@@ -235,4 +326,16 @@ Have a tool to suggest? [Submit a proposal for maintainer review](https://github
 <td>Primary method paper; independent benchmarking limited</td>
 <td>3.h;5.e</td>
 </tr>
-</tbody></table></div>
+<tr>
+<td>DRAM-v</td>
+<td>Assembled viral contigs or predicted proteins</td>
+<td>Integrates multiple annotation resources for downstream interpretation of viral genes and genomes</td>
+<td>Many viral genes remain hypothetical; annotation coverage and specificity depend on database representation</td>
+<td>Downstream functional annotation of assembled viral sequences</td>
+<td>Experimental confirmation of gene function, viral activity, or virus–host linkage from annotation alone</td>
+<td>Primary DRAM method paper and tool documentation; interpret viral-specific claims in context</td>
+<td>3.h;5.e</td>
+</tr>
+</tbody></table>
+
+</div>

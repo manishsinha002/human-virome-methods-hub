@@ -19,5 +19,16 @@ for filename,fields in required.items():
    first=(reader.fieldnames or [''])[0]; value=(row.get(first) or '').strip()
    if value in ids:errors.append(f'{filename}:{i}: duplicate {first} {value}')
    ids.append(value)
+reference_path=Path('data/references.csv')
+methods_path=Path('data/methods.csv')
+if reference_path.exists() and methods_path.exists():
+ with reference_path.open(newline='',encoding='utf-8') as f:
+  reference_ids={row['reference_id'].strip() for row in csv.DictReader(f) if row.get('reference_id')}
+ with methods_path.open(newline='',encoding='utf-8') as f:
+  for i,row in enumerate(csv.DictReader(f),start=2):
+   for reference_id in (row.get('reference_ids') or '').split(';'):
+    reference_id=reference_id.strip()
+    if reference_id and reference_id not in reference_ids:
+     errors.append(f'methods.csv:{i}: unknown reference_id {reference_id}')
 if errors:print('\n'.join(errors));sys.exit(1)
 print('All structured data files passed schema validation.')
