@@ -38,6 +38,8 @@ plugins:
   - search
 extra_css:
   - assets/stylesheets/extra.css
+extra_javascript:
+  - assets/javascripts/workflow.js
 markdown_extensions:
   - admonition
   - tables

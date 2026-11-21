@@ -1,0 +1,1254 @@
+{
+  "nodes": [
+    {
+      "id": "design",
+      "label": "Question, specimen and controls",
+      "summary": "Start with the biological question and specimen. These choices constrain which viral fractions can be recovered and what a negative result can mean.",
+      "why_it_matters": "The observed virome reflects both biology and technical selection across collection, enrichment, extraction and sequencing.",
+      "outputs": "A defined target, specimen context, controls and sequencing strategy.",
+      "caveat": "A method-negative result does not establish biological absence when the target fraction may not have been recovered or the assay lacks sensitivity.",
+      "review_sections": [
+        "2",
+        "2.5",
+        "2.6",
+        "4"
+      ],
+      "links": [
+        {
+          "label": "Compare sequencing strategies",
+          "url": "../strategies/"
+        },
+        {
+          "label": "Review specimen context",
+          "url": "../specimens/"
+        },
+        {
+          "label": "Read the reporting checklist",
+          "url": "../reporting-checklist/"
+        }
+      ],
+      "methods": []
+    },
+    {
+      "id": "sample-prep",
+      "label": "Recovery and sequencing strategy",
+      "summary": "Choose total metagenomics, particle enrichment, metatranscriptomics, capture, or read-length strategy to match the target and specimen.",
+      "why_it_matters": "Enrichment, extraction and library preparation preferentially recover or exclude viral fractions; sequencing strategy is part of the measurement, not a neutral prelude.",
+      "outputs": "A documented laboratory protocol, expected viral fraction, read type and control plan.",
+      "caveat": "No single strategy captures all DNA and RNA viruses, intracellular and extracellular particles, or integrated elements equally well.",
+      "review_sections": [
+        "2.1",
+        "2.2",
+        "2.3",
+        "2.4",
+        "2.5",
+        "2.6"
+      ],
+      "links": [
+        {
+          "label": "Compare sequencing strategies",
+          "url": "../strategies/"
+        },
+        {
+          "label": "Compare specimen considerations",
+          "url": "../specimens/"
+        },
+        {
+          "label": "Review benchmarks and controls",
+          "url": "../benchmarks/"
+        }
+      ],
+      "methods": []
+    },
+    {
+      "id": "read-qc",
+      "label": "Read quality control",
+      "summary": "Inspect raw reads, adapters, base quality, duplicates and library-specific artifacts; retain an auditable record of filtering.",
+      "why_it_matters": "Low-quality or artifactual reads can increase computational load and contribute misleading taxonomic matches.",
+      "outputs": "Quality reports and documented raw-to-filtered read counts, with unfiltered data retained when permitted.",
+      "caveat": "Aggressive trimming or filtering can remove real viral signal. Apply thresholds consistently and report versions and parameters.",
+      "review_sections": [
+        "3.a",
+        "4"
+      ],
+      "links": [
+        {
+          "label": "fastp (external project)",
+          "url": "https://github.com/OpenGene/fastp"
+        },
+        {
+          "label": "FastQC (external project)",
+          "url": "https://www.bioinformatics.babraham.ac.uk/projects/fastqc/"
+        },
+        {
+          "label": "Explore broader virome tools (Awesome-Virome)",
+          "url": "https://github.com/shandley/awesome-virome"
+        }
+      ],
+      "methods": []
+    },
+    {
+      "id": "host-removal",
+      "label": "Human-read removal",
+      "summary": "Screen reads against an appropriate human reference when required for privacy, downstream efficiency or study design.",
+      "why_it_matters": "Reference choice, alignment settings and filtering policy change retained reads and can affect both privacy risk and viral recovery.",
+      "outputs": "Filtered reads, screening logs, reference/version details, and counts before and after removal.",
+      "caveat": "Host-like viral sequences may be removed, and residual human sequence may remain. Filtering is not itself proof of privacy or biological neutrality.",
+      "review_sections": [
+        "3.a"
+      ],
+      "links": [
+        {
+          "label": "Human-read removal tools in the methods matrix",
+          "url": "../methods/#human-read-removal"
+        },
+        {
+          "label": "Read the evidence standards",
+          "url": "../evidence-standards/"
+        }
+      ],
+      "methods": [
+        {
+          "method_id": "M001",
+          "method_name": "Seal (BBTools)",
+          "software_url": "https://github.com/BioInfoTools/BBMap",
+          "best_use": "Rapid host-read screening and binning",
+          "main_strength": "Fast k-mer-based binning",
+          "main_limitation": "Performance depends on reference composition and parameterization; less independently benchmarked in viromics than major aligners",
+          "unsupported_or_weak_claim": "Proof that retained reads are non-human or that removed reads are exclusively host-derived",
+          "evidence_status": "Tool documentation plus review discussion",
+          "review_section": "3.a",
+          "references": [
+            {
+              "reference_id": "R001",
+              "doi": "",
+              "pmid": "",
+              "title": "BBTools / Seal documentation",
+              "year": "",
+              "topic": "Host-read removal",
+              "evidence_type": "Tool documentation",
+              "software_url": "https://github.com/BioInfoTools/BBMap",
+              "review_section": "3.a",
+              "date_added": "2026-11-19",
+              "review_status": "Needs bibliographic benchmark"
+            }
+          ]
+        },
+        {
+          "method_id": "M002",
+          "method_name": "Bowtie2",
+          "software_url": "https://bowtie-bio.sourceforge.net/bowtie2/",
+          "best_use": "Sensitive short-read host depletion",
+          "main_strength": "High precision and configurable sensitivity",
+          "main_limitation": "High-sensitivity modes increase runtime; reference and pairing choices affect removal",
+          "unsupported_or_weak_claim": "Guaranteed privacy or complete preservation of virus-like host sequences",
+          "evidence_status": "Multiple independent benchmarks",
+          "review_section": "3.a",
+          "references": [
+            {
+              "reference_id": "R002",
+              "doi": "10.1099/mgen.0.000393",
+              "pmid": "32558637",
+              "title": "Evaluation of methods for detecting human reads in microbial sequencing datasets",
+              "year": "2020",
+              "topic": "Host-read removal",
+              "evidence_type": "Independent benchmark",
+              "software_url": "",
+              "review_section": "3.a",
+              "date_added": "2026-11-19",
+              "review_status": "Verified in manuscript"
+            },
+            {
+              "reference_id": "R003",
+              "doi": "10.1016/j.crmeth.2025.101218",
+              "pmid": "",
+              "title": "Benchmarking of Human Read Removal Strategies for Viral and Microbial Metagenomics",
+              "year": "2025",
+              "topic": "Host-read removal",
+              "evidence_type": "Benchmark",
+              "software_url": "",
+              "review_section": "3.a",
+              "date_added": "2026-11-19",
+              "review_status": "Verify final bibliographic record"
+            },
+            {
+              "reference_id": "R004",
+              "doi": "",
+              "pmid": "38039142",
+              "title": "Hostile: accurate decontamination of microbial host sequences",
+              "year": "2023",
+              "topic": "Host-read removal",
+              "evidence_type": "Method and benchmark",
+              "software_url": "https://github.com/bede/hostile",
+              "review_section": "3.a",
+              "date_added": "2026-11-19",
+              "review_status": "Verified in manuscript"
+            }
+          ]
+        },
+        {
+          "method_id": "M003",
+          "method_name": "Minimap2",
+          "software_url": "https://github.com/lh3/minimap2",
+          "best_use": "Fast host depletion, including long reads",
+          "main_strength": "Fast alignment across read lengths",
+          "main_limitation": "Sensitivity depends on preset and reference; host-like viral sequence may be removed",
+          "unsupported_or_weak_claim": "Complete removal of identifiable human sequence without residual-risk assessment",
+          "evidence_status": "Used within Hostile; independent context-specific benchmarking needed",
+          "review_section": "3.a",
+          "references": [
+            {
+              "reference_id": "R004",
+              "doi": "",
+              "pmid": "38039142",
+              "title": "Hostile: accurate decontamination of microbial host sequences",
+              "year": "2023",
+              "topic": "Host-read removal",
+              "evidence_type": "Method and benchmark",
+              "software_url": "https://github.com/bede/hostile",
+              "review_section": "3.a",
+              "date_added": "2026-11-19",
+              "review_status": "Verified in manuscript"
+            }
+          ]
+        },
+        {
+          "method_id": "M004",
+          "method_name": "Hostile",
+          "software_url": "https://github.com/bede/hostile",
+          "best_use": "Laptop-scale host decontamination",
+          "main_strength": "High host-read removal with strong microbial-read retention",
+          "main_limitation": "Still depends on reference masking and cannot preserve every host-like viral signal",
+          "unsupported_or_weak_claim": "Detection of endogenous viral elements after strict host removal",
+          "evidence_status": "Primary benchmark with comparisons",
+          "review_section": "3.a",
+          "references": [
+            {
+              "reference_id": "R004",
+              "doi": "",
+              "pmid": "38039142",
+              "title": "Hostile: accurate decontamination of microbial host sequences",
+              "year": "2023",
+              "topic": "Host-read removal",
+              "evidence_type": "Method and benchmark",
+              "software_url": "https://github.com/bede/hostile",
+              "review_section": "3.a",
+              "date_added": "2026-11-19",
+              "review_status": "Verified in manuscript"
+            }
+          ]
+        },
+        {
+          "method_id": "M005",
+          "method_name": "SRA Human Read Removal Tool (SRA Human Scrubber)",
+          "software_url": "https://github.com/ncbi/sra-human-scrubber",
+          "best_use": "Submission-oriented privacy screening",
+          "main_strength": "Operationally aligned with SRA public-deposition screening",
+          "main_limitation": "Not optimized to retain every microbial or host-like viral read",
+          "unsupported_or_weak_claim": "Biologically neutral host depletion",
+          "evidence_status": "Benchmarked against alternative host-removal methods",
+          "review_section": "3.a",
+          "references": [
+            {
+              "reference_id": "R003",
+              "doi": "10.1016/j.crmeth.2025.101218",
+              "pmid": "",
+              "title": "Benchmarking of Human Read Removal Strategies for Viral and Microbial Metagenomics",
+              "year": "2025",
+              "topic": "Host-read removal",
+              "evidence_type": "Benchmark",
+              "software_url": "",
+              "review_section": "3.a",
+              "date_added": "2026-11-19",
+              "review_status": "Verify final bibliographic record"
+            },
+            {
+              "reference_id": "R004",
+              "doi": "",
+              "pmid": "38039142",
+              "title": "Hostile: accurate decontamination of microbial host sequences",
+              "year": "2023",
+              "topic": "Host-read removal",
+              "evidence_type": "Method and benchmark",
+              "software_url": "https://github.com/bede/hostile",
+              "review_section": "3.a",
+              "date_added": "2026-11-19",
+              "review_status": "Verified in manuscript"
+            }
+          ]
+        },
+        {
+          "method_id": "M006",
+          "method_name": "nf-core/detaxizer",
+          "software_url": "https://github.com/nf-core/detaxizer",
+          "best_use": "Standardized, auditable decontamination",
+          "main_strength": "Containerized, reproducible taxon-removal workflow",
+          "main_limitation": "Recall and false-positive balance depends strongly on database and chained passes",
+          "unsupported_or_weak_claim": "Universally optimal host removal",
+          "evidence_status": "Primary benchmarking study",
+          "review_section": "3.a",
+          "references": [
+            {
+              "reference_id": "R005",
+              "doi": "10.1093/nargab/lqaf125",
+              "pmid": "",
+              "title": "nf-core/detaxizer: A Benchmarking Study for Decontamination from Human Sequences",
+              "year": "2025",
+              "topic": "Host-read removal",
+              "evidence_type": "Method and benchmark",
+              "software_url": "https://github.com/nf-core/detaxizer",
+              "review_section": "3.a",
+              "date_added": "2026-11-19",
+              "review_status": "Verify final bibliographic record"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "read-kmer",
+      "label": "K-mer and profile-based screening",
+      "summary": "Classify reads or estimate profiles against reference databases using k-mers, coverage filters or combined nucleotide and translated searches.",
+      "why_it_matters": "Read-based screening can detect low-abundance, reference-represented viruses even when reads do not assemble into contigs.",
+      "outputs": "Candidate taxonomic assignments or abundance profiles, together with the database, confidence and coverage metrics.",
+      "caveat": "Reference composition limits discovery. A few matching reads or an abundance estimate alone does not confirm a virus, recover a genome or establish infection.",
+      "review_sections": [
+        "3.b",
+        "3.d"
+      ],
+      "links": [
+        {
+          "label": "Read-based profiling tools in the methods matrix",
+          "url": "../methods/#read-based-profiling"
+        },
+        {
+          "label": "Explore broader read-based tools (Awesome-Virome)",
+          "url": "https://github.com/shandley/awesome-virome#virus-and-phage-identification"
+        }
+      ],
+      "methods": [
+        {
+          "method_id": "M007",
+          "method_name": "Phanta",
+          "software_url": "https://github.com/bhattlab/phanta",
+          "best_use": "Rapid profiling of known/reference-represented viruses",
+          "main_strength": "Coverage-aware profiling improves specificity over raw read counts",
+          "main_limitation": "Cannot discover viruses absent from the reference; database composition controls labels",
+          "unsupported_or_weak_claim": "Confirmation of a novel virus or complete genome recovery",
+          "evidence_status": "Primary method paper; human-gut evaluation",
+          "review_section": "3.b",
+          "references": [
+            {
+              "reference_id": "R006",
+              "doi": "",
+              "pmid": "",
+              "title": "Phage-inclusive profiling of human gut microbiomes with Phanta",
+              "year": "2023",
+              "topic": "Read-based profiling",
+              "evidence_type": "Primary method paper",
+              "software_url": "https://github.com/bhattlab/phanta",
+              "review_section": "3.b",
+              "date_added": "2026-11-19",
+              "review_status": "Needs DOI/PMID verification"
+            }
+          ]
+        },
+        {
+          "method_id": "M008",
+          "method_name": "Kraken2",
+          "software_url": "https://github.com/DerrickWood/kraken2",
+          "best_use": "Rapid screening and exploratory profiling",
+          "main_strength": "Very fast and scalable",
+          "main_limitation": "Closely related taxa and database contamination can generate false positives; raw counts do not establish genome coverage",
+          "unsupported_or_weak_claim": "Species confirmation from a few reads",
+          "evidence_status": "Extensively benchmarked generally; human-virome-specific calibration limited",
+          "review_section": "3.b;3.d",
+          "references": [
+            {
+              "reference_id": "R007",
+              "doi": "10.1186/s13059-019-1891-0",
+              "pmid": "",
+              "title": "Improved metagenomic analysis with Kraken 2",
+              "year": "2019",
+              "topic": "Taxonomic classification",
+              "evidence_type": "Primary method paper",
+              "software_url": "https://github.com/DerrickWood/kraken2",
+              "review_section": "3.b;3.d",
+              "date_added": "2026-11-19",
+              "review_status": "Needs PMID verification"
+            }
+          ]
+        },
+        {
+          "method_id": "M022",
+          "method_name": "BAQLaVa",
+          "software_url": "https://github.com/biobakery/baqlava",
+          "best_use": "Read-based screening and profiling of known/reference-represented viruses in microbial communities",
+          "main_strength": "Combines nucleotide and translated searches to profile reference-represented viral genome bins",
+          "main_limitation": "Database representation and bacterial-depletion choices affect detection; profiles do not establish complete genomes or active infection",
+          "unsupported_or_weak_claim": "Discovery or confirmation of a novel virus, complete genome recovery, or active infection from profile output alone",
+          "evidence_status": "Primary method preprint and tool documentation",
+          "review_section": "3.b;3.d",
+          "references": [
+            {
+              "reference_id": "R020",
+              "doi": "10.64898/2026.02.11.705346",
+              "pmid": "41726920",
+              "title": "Enhanced multi-omic viral profiling from microbial community sequencing with BAQLaVa",
+              "year": "2026",
+              "topic": "Read-based profiling",
+              "evidence_type": "Preprint",
+              "software_url": "https://github.com/biobakery/baqlava",
+              "review_section": "3.b;3.d",
+              "date_added": "2026-11-21",
+              "review_status": "Preprint; independent validation needed"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "read-mapping",
+      "label": "Reference mapping and recruitment",
+      "summary": "Recruit reads to candidate reference genomes or contigs, then inspect identity, breadth, depth, paired-read consistency and competing matches.",
+      "why_it_matters": "The mapping database and alignment thresholds determine which reads count as supporting a candidate and how abundance is estimated.",
+      "outputs": "Per-reference alignments, coverage breadth/depth and candidate-specific supporting-read evidence.",
+      "caveat": "A local match or narrow conserved region can be misleading. Competitive references, coverage distribution, controls and ambiguity from multi-mapping reads matter.",
+      "review_sections": [
+        "3.b",
+        "3.d",
+        "3.g"
+      ],
+      "links": [
+        {
+          "label": "Explore read-mapping and profiling tools (Awesome-Virome)",
+          "url": "https://github.com/shandley/awesome-virome#virus-and-phage-identification"
+        },
+        {
+          "label": "Review evidence standards",
+          "url": "../evidence-standards/"
+        }
+      ],
+      "methods": [
+        {
+          "method_id": "M002",
+          "method_name": "Bowtie2",
+          "software_url": "https://bowtie-bio.sourceforge.net/bowtie2/",
+          "best_use": "Sensitive short-read host depletion",
+          "main_strength": "High precision and configurable sensitivity",
+          "main_limitation": "High-sensitivity modes increase runtime; reference and pairing choices affect removal",
+          "unsupported_or_weak_claim": "Guaranteed privacy or complete preservation of virus-like host sequences",
+          "evidence_status": "Multiple independent benchmarks",
+          "review_section": "3.a",
+          "references": [
+            {
+              "reference_id": "R002",
+              "doi": "10.1099/mgen.0.000393",
+              "pmid": "32558637",
+              "title": "Evaluation of methods for detecting human reads in microbial sequencing datasets",
+              "year": "2020",
+              "topic": "Host-read removal",
+              "evidence_type": "Independent benchmark",
+              "software_url": "",
+              "review_section": "3.a",
+              "date_added": "2026-11-19",
+              "review_status": "Verified in manuscript"
+            },
+            {
+              "reference_id": "R003",
+              "doi": "10.1016/j.crmeth.2025.101218",
+              "pmid": "",
+              "title": "Benchmarking of Human Read Removal Strategies for Viral and Microbial Metagenomics",
+              "year": "2025",
+              "topic": "Host-read removal",
+              "evidence_type": "Benchmark",
+              "software_url": "",
+              "review_section": "3.a",
+              "date_added": "2026-11-19",
+              "review_status": "Verify final bibliographic record"
+            },
+            {
+              "reference_id": "R004",
+              "doi": "",
+              "pmid": "38039142",
+              "title": "Hostile: accurate decontamination of microbial host sequences",
+              "year": "2023",
+              "topic": "Host-read removal",
+              "evidence_type": "Method and benchmark",
+              "software_url": "https://github.com/bede/hostile",
+              "review_section": "3.a",
+              "date_added": "2026-11-19",
+              "review_status": "Verified in manuscript"
+            }
+          ]
+        },
+        {
+          "method_id": "M003",
+          "method_name": "Minimap2",
+          "software_url": "https://github.com/lh3/minimap2",
+          "best_use": "Fast host depletion, including long reads",
+          "main_strength": "Fast alignment across read lengths",
+          "main_limitation": "Sensitivity depends on preset and reference; host-like viral sequence may be removed",
+          "unsupported_or_weak_claim": "Complete removal of identifiable human sequence without residual-risk assessment",
+          "evidence_status": "Used within Hostile; independent context-specific benchmarking needed",
+          "review_section": "3.a",
+          "references": [
+            {
+              "reference_id": "R004",
+              "doi": "",
+              "pmid": "38039142",
+              "title": "Hostile: accurate decontamination of microbial host sequences",
+              "year": "2023",
+              "topic": "Host-read removal",
+              "evidence_type": "Method and benchmark",
+              "software_url": "https://github.com/bede/hostile",
+              "review_section": "3.a",
+              "date_added": "2026-11-19",
+              "review_status": "Verified in manuscript"
+            }
+          ]
+        },
+        {
+          "method_id": "M008",
+          "method_name": "Kraken2",
+          "software_url": "https://github.com/DerrickWood/kraken2",
+          "best_use": "Rapid screening and exploratory profiling",
+          "main_strength": "Very fast and scalable",
+          "main_limitation": "Closely related taxa and database contamination can generate false positives; raw counts do not establish genome coverage",
+          "unsupported_or_weak_claim": "Species confirmation from a few reads",
+          "evidence_status": "Extensively benchmarked generally; human-virome-specific calibration limited",
+          "review_section": "3.b;3.d",
+          "references": [
+            {
+              "reference_id": "R007",
+              "doi": "10.1186/s13059-019-1891-0",
+              "pmid": "",
+              "title": "Improved metagenomic analysis with Kraken 2",
+              "year": "2019",
+              "topic": "Taxonomic classification",
+              "evidence_type": "Primary method paper",
+              "software_url": "https://github.com/DerrickWood/kraken2",
+              "review_section": "3.b;3.d",
+              "date_added": "2026-11-19",
+              "review_status": "Needs PMID verification"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "read-abundance",
+      "label": "Abundance and comparison",
+      "summary": "Estimate read support and compare samples only after defining normalization, multi-mapping policy, controls and the unit of analysis.",
+      "why_it_matters": "Mapping stringency, genome length normalization and ambiguous reads can materially change abundance estimates and cross-sample conclusions.",
+      "outputs": "A reproducible abundance table with normalization, denominator, database version and uncertainty/controls described.",
+      "caveat": "Relative abundance is not absolute viral load. Sequencing depth, enrichment efficiency, batch effects and contamination can mimic biological differences.",
+      "review_sections": [
+        "3.b",
+        "3.i",
+        "4",
+        "5.c"
+      ],
+      "links": [
+        {
+          "label": "Read the evidence standards",
+          "url": "../evidence-standards/"
+        },
+        {
+          "label": "Use the reporting checklist",
+          "url": "../reporting-checklist/"
+        },
+        {
+          "label": "Explore broader virome tools (Awesome-Virome)",
+          "url": "https://github.com/shandley/awesome-virome"
+        }
+      ],
+      "methods": [
+        {
+          "method_id": "M007",
+          "method_name": "Phanta",
+          "software_url": "https://github.com/bhattlab/phanta",
+          "best_use": "Rapid profiling of known/reference-represented viruses",
+          "main_strength": "Coverage-aware profiling improves specificity over raw read counts",
+          "main_limitation": "Cannot discover viruses absent from the reference; database composition controls labels",
+          "unsupported_or_weak_claim": "Confirmation of a novel virus or complete genome recovery",
+          "evidence_status": "Primary method paper; human-gut evaluation",
+          "review_section": "3.b",
+          "references": [
+            {
+              "reference_id": "R006",
+              "doi": "",
+              "pmid": "",
+              "title": "Phage-inclusive profiling of human gut microbiomes with Phanta",
+              "year": "2023",
+              "topic": "Read-based profiling",
+              "evidence_type": "Primary method paper",
+              "software_url": "https://github.com/bhattlab/phanta",
+              "review_section": "3.b",
+              "date_added": "2026-11-19",
+              "review_status": "Needs DOI/PMID verification"
+            }
+          ]
+        },
+        {
+          "method_id": "M008",
+          "method_name": "Kraken2",
+          "software_url": "https://github.com/DerrickWood/kraken2",
+          "best_use": "Rapid screening and exploratory profiling",
+          "main_strength": "Very fast and scalable",
+          "main_limitation": "Closely related taxa and database contamination can generate false positives; raw counts do not establish genome coverage",
+          "unsupported_or_weak_claim": "Species confirmation from a few reads",
+          "evidence_status": "Extensively benchmarked generally; human-virome-specific calibration limited",
+          "review_section": "3.b;3.d",
+          "references": [
+            {
+              "reference_id": "R007",
+              "doi": "10.1186/s13059-019-1891-0",
+              "pmid": "",
+              "title": "Improved metagenomic analysis with Kraken 2",
+              "year": "2019",
+              "topic": "Taxonomic classification",
+              "evidence_type": "Primary method paper",
+              "software_url": "https://github.com/DerrickWood/kraken2",
+              "review_section": "3.b;3.d",
+              "date_added": "2026-11-19",
+              "review_status": "Needs PMID verification"
+            }
+          ]
+        },
+        {
+          "method_id": "M022",
+          "method_name": "BAQLaVa",
+          "software_url": "https://github.com/biobakery/baqlava",
+          "best_use": "Read-based screening and profiling of known/reference-represented viruses in microbial communities",
+          "main_strength": "Combines nucleotide and translated searches to profile reference-represented viral genome bins",
+          "main_limitation": "Database representation and bacterial-depletion choices affect detection; profiles do not establish complete genomes or active infection",
+          "unsupported_or_weak_claim": "Discovery or confirmation of a novel virus, complete genome recovery, or active infection from profile output alone",
+          "evidence_status": "Primary method preprint and tool documentation",
+          "review_section": "3.b;3.d",
+          "references": [
+            {
+              "reference_id": "R020",
+              "doi": "10.64898/2026.02.11.705346",
+              "pmid": "41726920",
+              "title": "Enhanced multi-omic viral profiling from microbial community sequencing with BAQLaVa",
+              "year": "2026",
+              "topic": "Read-based profiling",
+              "evidence_type": "Preprint",
+              "software_url": "https://github.com/biobakery/baqlava",
+              "review_section": "3.b;3.d",
+              "date_added": "2026-11-21",
+              "review_status": "Preprint; independent validation needed"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "assembly",
+      "label": "De novo assembly",
+      "summary": "Assemble quality-controlled reads into contigs to support candidate discovery and genome-level analysis.",
+      "why_it_matters": "Assembly provides sequence context beyond individual reads, but its yield depends on coverage, strain diversity, repeats and read technology.",
+      "outputs": "Contigs or assembled genomes plus assembly statistics, graph/read support and reproducible settings.",
+      "caveat": "Assembly alone does not prove a contig is viral, complete or non-chimeric. Preserve graph and read-level evidence for candidate review.",
+      "review_sections": [
+        "3.b",
+        "3.c",
+        "5.b"
+      ],
+      "links": [
+        {
+          "label": "Assembly tools in the methods matrix",
+          "url": "../methods/#assembly"
+        },
+        {
+          "label": "Explore genome assemblers (Awesome-Virome)",
+          "url": "https://github.com/shandley/awesome-virome#genome-assembly"
+        }
+      ],
+      "methods": [
+        {
+          "method_id": "M009",
+          "method_name": "metaSPAdes",
+          "software_url": "https://github.com/ablab/spades",
+          "best_use": "General short-read metagenome assembly before viral calling",
+          "main_strength": "Widely used de novo assembler for complex communities",
+          "main_limitation": "Microdiversity, repeats and uneven coverage fragment or collapse viral genomes",
+          "unsupported_or_weak_claim": "Proof that a contig is viral or non-chimeric",
+          "evidence_status": "Primary assembler paper; extensive use",
+          "review_section": "3.b;3.c",
+          "references": [
+            {
+              "reference_id": "R008",
+              "doi": "",
+              "pmid": "",
+              "title": "metaSPAdes: a new versatile metagenomic assembler",
+              "year": "2017",
+              "topic": "Assembly",
+              "evidence_type": "Primary method paper",
+              "software_url": "https://github.com/ablab/spades",
+              "review_section": "3.b;3.c",
+              "date_added": "2026-11-19",
+              "review_status": "Needs DOI/PMID verification"
+            }
+          ]
+        },
+        {
+          "method_id": "M010",
+          "method_name": "MEGAHIT",
+          "software_url": "https://github.com/voutcn/megahit",
+          "best_use": "Large short-read metagenomic cohorts",
+          "main_strength": "Fast and memory-efficient for large datasets",
+          "main_limitation": "Does not eliminate fragmentation, collapse or chimeric assembly risks",
+          "unsupported_or_weak_claim": "Independent confirmation of viral origin",
+          "evidence_status": "Primary method paper; widely used",
+          "review_section": "3.b;3.c",
+          "references": [
+            {
+              "reference_id": "R009",
+              "doi": "",
+              "pmid": "",
+              "title": "MEGAHIT: an ultra-fast single-node solution for large and complex metagenomics assembly",
+              "year": "2015",
+              "topic": "Assembly",
+              "evidence_type": "Primary method paper",
+              "software_url": "https://github.com/voutcn/megahit",
+              "review_section": "3.b;3.c",
+              "date_added": "2026-11-19",
+              "review_status": "Needs DOI/PMID verification"
+            }
+          ]
+        },
+        {
+          "method_id": "M021",
+          "method_name": "metaviralSPAdes",
+          "software_url": "https://github.com/ablab/spades",
+          "best_use": "De novo viral genome assembly from metagenomic short reads",
+          "main_strength": "Specialized assembly approach for recovering viral sequences from metagenomic data",
+          "main_limitation": "Assembly quality depends on read quality, depth, strain diversity, and genomic repeats; viral origin is not established by assembly alone",
+          "unsupported_or_weak_claim": "A contig is viral, complete, non-chimeric, or biologically active based on assembly alone",
+          "evidence_status": "Primary method paper; human-virome context-specific benchmarking needed",
+          "review_section": "3.b;3.c",
+          "references": [
+            {
+              "reference_id": "R021",
+              "doi": "10.1093/bioinformatics/btaa490",
+              "pmid": "32413137",
+              "title": "Metaviral SPAdes: assembly of viruses from metagenomic data",
+              "year": "2020",
+              "topic": "Assembly",
+              "evidence_type": "Primary method paper",
+              "software_url": "https://github.com/ablab/spades",
+              "review_section": "3.b;3.c",
+              "date_added": "2026-11-21",
+              "review_status": "Verified in PubMed and Europe PMC"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "viral-identification",
+      "label": "Viral-sequence identification",
+      "summary": "Assess contigs with complementary homology, hallmark-marker, sequence-composition and machine-learning evidence; combine signals where possible.",
+      "why_it_matters": "Each evidence class has different strengths. Current tools often combine them, and tool choice changes which candidates enter the observed virome.",
+      "outputs": "Candidate viral contigs with per-tool scores, supporting genes/alignments and method-specific uncertainty.",
+      "caveat": "No classifier score alone establishes a novel virus. Short contigs, plasmids, cellular sequences, database gaps and assembly artifacts can produce uncertain calls.",
+      "review_sections": [
+        "3.d",
+        "3.e",
+        "3.g"
+      ],
+      "links": [
+        {
+          "label": "Viral-sequence identification tools in the methods matrix",
+          "url": "../methods/#viral-sequence-identification"
+        },
+        {
+          "label": "Browse the broader identification catalogue (Awesome-Virome)",
+          "url": "https://github.com/shandley/awesome-virome#virus-and-phage-identification"
+        }
+      ],
+      "methods": [
+        {
+          "method_id": "M011",
+          "method_name": "geNomad",
+          "software_url": "https://github.com/apcamargo/genomad",
+          "best_use": "General viral contig and provirus identification",
+          "main_strength": "Integrated marker, gene-content and neural-network evidence",
+          "main_limitation": "Short or atypical elements may lack decisive features; taxonomy is often above species level",
+          "unsupported_or_weak_claim": "Experimental function, infectivity or artifact-free assembly",
+          "evidence_status": "Primary benchmark and broad evaluations",
+          "review_section": "3.b;3.d;3.g",
+          "references": [
+            {
+              "reference_id": "R010",
+              "doi": "10.1038/s41587-023-01953-y",
+              "pmid": "",
+              "title": "Identification of mobile genetic elements with geNomad",
+              "year": "2023",
+              "topic": "Viral identification",
+              "evidence_type": "Primary method paper",
+              "software_url": "https://github.com/apcamargo/genomad",
+              "review_section": "3.b;3.d",
+              "date_added": "2026-11-19",
+              "review_status": "DOI from manuscript"
+            }
+          ]
+        },
+        {
+          "method_id": "M012",
+          "method_name": "VirSorter2",
+          "software_url": "https://github.com/jiarong/VirSorter2",
+          "best_use": "Sensitive candidate discovery followed by quality control",
+          "main_strength": "Multi-classifier framework across diverse viral groups",
+          "main_limitation": "False positives increase without post-filtering; performance varies by group and contig length",
+          "unsupported_or_weak_claim": "Automatic confirmation that every score-positive contig is viral",
+          "evidence_status": "Primary benchmark; independent comparisons available",
+          "review_section": "3.d;3.g",
+          "references": [
+            {
+              "reference_id": "R011",
+              "doi": "",
+              "pmid": "33522966",
+              "title": "VirSorter2: a multi-classifier, expert-guided approach to detect diverse DNA and RNA viruses",
+              "year": "2021",
+              "topic": "Viral identification",
+              "evidence_type": "Primary method paper",
+              "software_url": "https://github.com/jiarong/VirSorter2",
+              "review_section": "3.d",
+              "date_added": "2026-11-19",
+              "review_status": "PMID from manuscript"
+            }
+          ]
+        },
+        {
+          "method_id": "M013",
+          "method_name": "VIBRANT",
+          "software_url": "https://github.com/AnantharamanLab/VIBRANT",
+          "best_use": "Phage/provirus recovery with preliminary annotation",
+          "main_strength": "Combines viral identification with protein annotation",
+          "main_limitation": "Database and training representation affect sensitivity; functional calls remain putative",
+          "unsupported_or_weak_claim": "Validated biological function or infectivity",
+          "evidence_status": "Primary method paper; independent comparisons available",
+          "review_section": "3.d;3.g",
+          "references": [
+            {
+              "reference_id": "R012",
+              "doi": "",
+              "pmid": "32522236",
+              "title": "VIBRANT: automated recovery, annotation and curation of microbial viruses",
+              "year": "2020",
+              "topic": "Viral identification and annotation",
+              "evidence_type": "Primary method paper",
+              "software_url": "https://github.com/AnantharamanLab/VIBRANT",
+              "review_section": "3.d",
+              "date_added": "2026-11-19",
+              "review_status": "PMID from manuscript"
+            }
+          ]
+        },
+        {
+          "method_id": "M014",
+          "method_name": "DeepVirFinder",
+          "software_url": "https://github.com/jessieren/DeepVirFinder",
+          "best_use": "Prioritizing divergent candidates for multi-evidence review",
+          "main_strength": "Alignment-free detection of divergent and shorter sequences",
+          "main_limitation": "Probabilistic score is sensitive to training data, length and atypical cellular sequences",
+          "unsupported_or_weak_claim": "Standalone confirmation of a novel virus",
+          "evidence_status": "Primary method paper; independent comparisons available",
+          "review_section": "3.d;3.e",
+          "references": [
+            {
+              "reference_id": "R013",
+              "doi": "",
+              "pmid": "34084563",
+              "title": "Identifying viruses from metagenomic data using deep learning",
+              "year": "2020",
+              "topic": "Machine-learning viral identification",
+              "evidence_type": "Primary method paper",
+              "software_url": "https://github.com/jessieren/DeepVirFinder",
+              "review_section": "3.d;3.e",
+              "date_added": "2026-11-19",
+              "review_status": "PMID from manuscript"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "genome-quality",
+      "label": "Genome quality and similarity",
+      "summary": "Assess completeness, contamination, read support and possible provirus boundaries; compare sufficiently supported genomes with explicit identity and coverage metrics.",
+      "why_it_matters": "Quality thresholds and genome-similarity rules affect which sequences are retained, dereplicated and interpreted as distinct.",
+      "outputs": "Quality estimates, boundary calls, pairwise similarity/ANI and clustering results with database and threshold versions.",
+      "caveat": "ANI is a genome/contig comparison concept, not read classification. Incomplete genomes, alignment fraction and reference coverage affect similarity; a cluster is not automatically a formal taxon.",
+      "review_sections": [
+        "3.c",
+        "3.h",
+        "5.b"
+      ],
+      "links": [
+        {
+          "label": "Genome quality and clustering tools in the methods matrix",
+          "url": "../methods/#genome-quality-and-clustering"
+        },
+        {
+          "label": "Explore broader genome-analysis tools (Awesome-Virome)",
+          "url": "https://github.com/shandley/awesome-virome#genome-analysis"
+        }
+      ],
+      "methods": [
+        {
+          "method_id": "M015",
+          "method_name": "CheckV",
+          "software_url": "https://bitbucket.org/berkeleylab/checkv",
+          "best_use": "Post-identification genome quality and provirus assessment",
+          "main_strength": "Standardized estimates and host-boundary support",
+          "main_limitation": "Novel groups may receive uncertain completeness estimates; not a viral detector",
+          "unsupported_or_weak_claim": "Proof of infectivity or taxonomic identity",
+          "evidence_status": "Primary method paper; widely adopted",
+          "review_section": "3.b;3.c;3.h",
+          "references": [
+            {
+              "reference_id": "R014",
+              "doi": "10.1038/s41587-020-00774-7",
+              "pmid": "33349699",
+              "title": "CheckV assesses the quality and completeness of metagenome-assembled viral genomes",
+              "year": "2021",
+              "topic": "Genome quality",
+              "evidence_type": "Primary method paper",
+              "software_url": "https://bitbucket.org/berkeleylab/checkv",
+              "review_section": "3.b;3.c;3.h",
+              "date_added": "2026-11-19",
+              "review_status": "Verified in manuscript"
+            }
+          ]
+        },
+        {
+          "method_id": "M016",
+          "method_name": "Vclust",
+          "software_url": "https://github.com/refresh-bio/vclust",
+          "best_use": "vOTU dereplication and within/across-study clustering",
+          "main_strength": "Fast large-scale ANI and clustering",
+          "main_limitation": "Cluster quality depends on input completeness, alignment coverage and thresholds",
+          "unsupported_or_weak_claim": "Formal taxonomy or biological equivalence without supporting evidence",
+          "evidence_status": "Primary method/tool evidence",
+          "review_section": "3.h",
+          "references": [
+            {
+              "reference_id": "R015",
+              "doi": "",
+              "pmid": "",
+              "title": "Vclust: fast and accurate clustering of viral genomes",
+              "year": "2024",
+              "topic": "Viral clustering",
+              "evidence_type": "Primary method/tool paper",
+              "software_url": "https://github.com/refresh-bio/vclust",
+              "review_section": "3.h",
+              "date_added": "2026-11-19",
+              "review_status": "Needs bibliography verification"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "taxonomy",
+      "label": "Taxonomy and genome context",
+      "summary": "Assign taxonomy using sequence similarity, genome-wide relationships, hallmark genes and curated taxonomic references appropriate to the viral group.",
+      "why_it_matters": "Taxonomic resolution depends on reference diversity, genome completeness and the classification system; methods may disagree or stop above species level.",
+      "outputs": "Taxonomic assignments and their supporting identity, coverage, gene-content or genome-context evidence.",
+      "caveat": "Do not equate one nearest database match or clustering threshold with a formally established species or biological equivalence.",
+      "review_sections": [
+        "3.d",
+        "3.h",
+        "4"
+      ],
+      "links": [
+        {
+          "label": "Explore viral taxonomy tools (Awesome-Virome)",
+          "url": "https://github.com/shandley/awesome-virome#taxonomy"
+        },
+        {
+          "label": "Review evidence standards",
+          "url": "../evidence-standards/"
+        }
+      ],
+      "methods": [
+        {
+          "method_id": "M008",
+          "method_name": "Kraken2",
+          "software_url": "https://github.com/DerrickWood/kraken2",
+          "best_use": "Rapid screening and exploratory profiling",
+          "main_strength": "Very fast and scalable",
+          "main_limitation": "Closely related taxa and database contamination can generate false positives; raw counts do not establish genome coverage",
+          "unsupported_or_weak_claim": "Species confirmation from a few reads",
+          "evidence_status": "Extensively benchmarked generally; human-virome-specific calibration limited",
+          "review_section": "3.b;3.d",
+          "references": [
+            {
+              "reference_id": "R007",
+              "doi": "10.1186/s13059-019-1891-0",
+              "pmid": "",
+              "title": "Improved metagenomic analysis with Kraken 2",
+              "year": "2019",
+              "topic": "Taxonomic classification",
+              "evidence_type": "Primary method paper",
+              "software_url": "https://github.com/DerrickWood/kraken2",
+              "review_section": "3.b;3.d",
+              "date_added": "2026-11-19",
+              "review_status": "Needs PMID verification"
+            }
+          ]
+        },
+        {
+          "method_id": "M011",
+          "method_name": "geNomad",
+          "software_url": "https://github.com/apcamargo/genomad",
+          "best_use": "General viral contig and provirus identification",
+          "main_strength": "Integrated marker, gene-content and neural-network evidence",
+          "main_limitation": "Short or atypical elements may lack decisive features; taxonomy is often above species level",
+          "unsupported_or_weak_claim": "Experimental function, infectivity or artifact-free assembly",
+          "evidence_status": "Primary benchmark and broad evaluations",
+          "review_section": "3.b;3.d;3.g",
+          "references": [
+            {
+              "reference_id": "R010",
+              "doi": "10.1038/s41587-023-01953-y",
+              "pmid": "",
+              "title": "Identification of mobile genetic elements with geNomad",
+              "year": "2023",
+              "topic": "Viral identification",
+              "evidence_type": "Primary method paper",
+              "software_url": "https://github.com/apcamargo/genomad",
+              "review_section": "3.b;3.d",
+              "date_added": "2026-11-19",
+              "review_status": "DOI from manuscript"
+            }
+          ]
+        },
+        {
+          "method_id": "M016",
+          "method_name": "Vclust",
+          "software_url": "https://github.com/refresh-bio/vclust",
+          "best_use": "vOTU dereplication and within/across-study clustering",
+          "main_strength": "Fast large-scale ANI and clustering",
+          "main_limitation": "Cluster quality depends on input completeness, alignment coverage and thresholds",
+          "unsupported_or_weak_claim": "Formal taxonomy or biological equivalence without supporting evidence",
+          "evidence_status": "Primary method/tool evidence",
+          "review_section": "3.h",
+          "references": [
+            {
+              "reference_id": "R015",
+              "doi": "",
+              "pmid": "",
+              "title": "Vclust: fast and accurate clustering of viral genomes",
+              "year": "2024",
+              "topic": "Viral clustering",
+              "evidence_type": "Primary method/tool paper",
+              "software_url": "https://github.com/refresh-bio/vclust",
+              "review_section": "3.h",
+              "date_added": "2026-11-19",
+              "review_status": "Needs bibliography verification"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "host-function",
+      "label": "Host and functional hypotheses",
+      "summary": "Predict virus–host links and annotate genes with sequence, marker, structure or model-based evidence; prioritize consequential claims for orthogonal validation.",
+      "why_it_matters": "Host predictions and viral protein annotations extend interpretation beyond sequence detection, but each depends on reference coverage, model domain and contextual evidence.",
+      "outputs": "Host-link predictions, gene annotations and structure/function hypotheses with confidence, evidence source and database/model versions.",
+      "caveat": "Predictions do not prove infection, host range, activity or experimentally validated function. Structure similarity (including Foldseek) and predicted structure (including AlphaFold) generate hypotheses, not functional confirmation.",
+      "review_sections": [
+        "3.f",
+        "3.h",
+        "5.d",
+        "5.e"
+      ],
+      "links": [
+        {
+          "label": "Host and functional interpretation tools in the methods matrix",
+          "url": "../methods/#virus-host-and-functional-interpretation"
+        },
+        {
+          "label": "Explore host-prediction tools (Awesome-Virome)",
+          "url": "https://github.com/shandley/awesome-virome#host-prediction"
+        },
+        {
+          "label": "Explore viral genome annotation tools (Awesome-Virome)",
+          "url": "https://github.com/shandley/awesome-virome#genome-analysis"
+        }
+      ],
+      "methods": [
+        {
+          "method_id": "M017",
+          "method_name": "iPHoP",
+          "software_url": "https://bitbucket.org/srouxjgi/iphop",
+          "best_use": "Prioritized bacteriophage-host hypotheses",
+          "main_strength": "Integrates multiple host-prediction signals",
+          "main_limitation": "Accuracy and taxonomic resolution vary; database coverage limits hosts",
+          "unsupported_or_weak_claim": "Confirmed infection, productive replication or strain-level host without validation",
+          "evidence_status": "Primary benchmark; external testing desirable",
+          "review_section": "3.h;5.d",
+          "references": [
+            {
+              "reference_id": "R016",
+              "doi": "",
+              "pmid": "",
+              "title": "iPHoP: an integrated machine learning framework to maximize host prediction for metagenome-derived viruses",
+              "year": "2023",
+              "topic": "Virus-host prediction",
+              "evidence_type": "Primary method paper",
+              "software_url": "https://bitbucket.org/srouxjgi/iphop",
+              "review_section": "3.h;5.d",
+              "date_added": "2026-11-19",
+              "review_status": "Needs DOI/PMID verification"
+            }
+          ]
+        },
+        {
+          "method_id": "M018",
+          "method_name": "Foldseek",
+          "software_url": "https://github.com/steineggerlab/foldseek",
+          "best_use": "Hypothesis generation for viral protein dark matter",
+          "main_strength": "Sensitive remote-homology search beyond sequence similarity",
+          "main_limitation": "A structural match does not prove exact function, viral origin or contig authenticity",
+          "unsupported_or_weak_claim": "Experimentally validated function from structure alone",
+          "evidence_status": "Primary method paper; broad structural benchmarking",
+          "review_section": "3.f;5.e",
+          "references": [
+            {
+              "reference_id": "R017",
+              "doi": "10.1038/s41587-023-01773-0",
+              "pmid": "37156916",
+              "title": "Fast and accurate protein structure search with Foldseek",
+              "year": "2023",
+              "topic": "Structure search",
+              "evidence_type": "Primary method paper",
+              "software_url": "https://github.com/steineggerlab/foldseek",
+              "review_section": "3.f;5.e",
+              "date_added": "2026-11-19",
+              "review_status": "PMID from manuscript"
+            }
+          ]
+        },
+        {
+          "method_id": "M019",
+          "method_name": "AlphaFold",
+          "software_url": "https://github.com/google-deepmind/alphafold",
+          "best_use": "Supporting structure-informed annotation",
+          "main_strength": "Provides structural hypotheses for proteins lacking homologs",
+          "main_limitation": "pLDDT measures local structural confidence, not functional correctness; disordered regions may remain unresolved",
+          "unsupported_or_weak_claim": "Validated function, viral origin or biological activity",
+          "evidence_status": "Extensively benchmarked structurally; viral function requires additional evidence",
+          "review_section": "3.f;5.e",
+          "references": [
+            {
+              "reference_id": "R018",
+              "doi": "",
+              "pmid": "",
+              "title": "Highly accurate protein structure prediction with AlphaFold",
+              "year": "2021",
+              "topic": "Structure prediction",
+              "evidence_type": "Primary method paper",
+              "software_url": "https://github.com/google-deepmind/alphafold",
+              "review_section": "3.f;5.e",
+              "date_added": "2026-11-19",
+              "review_status": "Needs DOI/PMID verification"
+            }
+          ]
+        },
+        {
+          "method_id": "M020",
+          "method_name": "Pharokka",
+          "software_url": "https://github.com/gbouras13/pharokka",
+          "best_use": "Initial annotation of phage genomes",
+          "main_strength": "Rapid standardized phage annotation",
+          "main_limitation": "Unknown proteins remain hypothetical; annotations inherit database errors",
+          "unsupported_or_weak_claim": "Experimental confirmation of gene function",
+          "evidence_status": "Primary method paper; independent benchmarking limited",
+          "review_section": "3.h;5.e",
+          "references": [
+            {
+              "reference_id": "R019",
+              "doi": "",
+              "pmid": "",
+              "title": "Pharokka: a fast scalable bacteriophage annotation tool",
+              "year": "2023",
+              "topic": "Phage annotation",
+              "evidence_type": "Primary method paper",
+              "software_url": "https://github.com/gbouras13/pharokka",
+              "review_section": "3.h;5.e",
+              "date_added": "2026-11-19",
+              "review_status": "Needs DOI/PMID verification"
+            }
+          ]
+        },
+        {
+          "method_id": "M023",
+          "method_name": "DRAM-v",
+          "software_url": "https://github.com/BortonWrightonLabs/DRAM/tree/master",
+          "best_use": "Downstream functional annotation of assembled viral sequences",
+          "main_strength": "Integrates multiple annotation resources for downstream interpretation of viral genes and genomes",
+          "main_limitation": "Many viral genes remain hypothetical; annotation coverage and specificity depend on database representation",
+          "unsupported_or_weak_claim": "Experimental confirmation of gene function, viral activity, or virus–host linkage from annotation alone",
+          "evidence_status": "Primary DRAM method paper and tool documentation; interpret viral-specific claims in context",
+          "review_section": "3.h;5.e",
+          "references": [
+            {
+              "reference_id": "R022",
+              "doi": "10.1093/nar/gkaa621",
+              "pmid": "32766782",
+              "title": "DRAM for distilling microbial metabolism to automate the curation of microbiome function",
+              "year": "2020",
+              "topic": "Viral functional annotation",
+              "evidence_type": "Primary method paper and tool documentation",
+              "software_url": "https://github.com/BortonWrightonLabs/DRAM/tree/master",
+              "review_section": "3.h;5.e",
+              "date_added": "2026-11-21",
+              "review_status": "DRAM-v-specific claims need contextual interpretation"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "validation-reporting",
+      "label": "Validation and reporting",
+      "summary": "Use negative and positive controls, quantitative standards and orthogonal evidence to evaluate key findings; report enough detail for reproducibility.",
+      "why_it_matters": "Low-biomass contamination, database versions and undocumented thresholds can otherwise be mistaken for biological signal or prevent cross-study comparison.",
+      "outputs": "Validated or explicitly provisional claims; controls; parameters; software/database versions; and traceable intermediate results.",
+      "caveat": "Keep claim strength proportional to the evidence: detection, genome recovery, activity, host linkage and function are distinct conclusions.",
+      "review_sections": [
+        "2.6",
+        "3.g",
+        "4",
+        "5.e",
+        "6"
+      ],
+      "links": [
+        {
+          "label": "Evidence standards",
+          "url": "../evidence-standards/"
+        },
+        {
+          "label": "Reporting checklist",
+          "url": "../reporting-checklist/"
+        },
+        {
+          "label": "Benchmarks and controls",
+          "url": "../benchmarks/"
+        },
+        {
+          "label": "Workflow reproducibility guidance (nf-core)",
+          "url": "https://nf-co.re/docs"
+        }
+      ],
+      "methods": []
+    }
+  ]
+}

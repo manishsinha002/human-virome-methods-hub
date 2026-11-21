@@ -1,5 +1,5 @@
 from pathlib import Path
-import csv, html
+import csv, html, json
 ROOT=Path(__file__).resolve().parents[1]
 def read(name):
     with (ROOT/'data'/name).open(encoding='utf-8',newline='') as f:return list(csv.DictReader(f))
@@ -33,4 +33,30 @@ strategies=read('strategies.csv')
 strategy_cols=[('strategy','Strategy'),('principal_fraction_measured','Principal fraction measured'),('strengths','Strengths'),('major_limitations_and_blind_spots','Blind spots'),('best_suited_applications','Best-suited applications')]
 text='# Sequencing strategies\n\nSequencing strategy determines which viral fractions are observable and how well samples support detection, genome recovery, and interpretation. Compare the trade-offs below in the context of your specimen and research question. On narrower screens, scroll the table horizontally to see every column.\n\n<div class="strategies-table">\n\n'+table(strategies,strategy_cols)+'\n\n</div>\n'
 (ROOT/'docs/strategies.md').write_text(text,encoding='utf-8')
-print(f'Built {len(methods)} method rows and {len(strategies)} strategy rows.')
+references={row['reference_id']:row for row in read('references.csv')}
+workflow=json.loads((ROOT/'data/workflow.json').read_text(encoding='utf-8'))
+methods_by_id={row['method_id']:row for row in methods}
+for node in workflow['nodes']:
+    node['methods']=[]
+    for method_id in node.pop('method_ids',[]):
+        method=methods_by_id[method_id]
+        node['methods'].append({
+            'method_id':method['method_id'],
+            'method_name':method['method_name'],
+            'software_url':method['software_url'],
+            'best_use':method['best_use'],
+            'main_strength':method['main_strength'],
+            'main_limitation':method['main_limitation'],
+            'unsupported_or_weak_claim':method['unsupported_or_weak_claim'],
+            'evidence_status':method['evidence_status'],
+            'review_section':method['review_section'],
+            'references':[
+                references[reference_id]
+                for reference_id in method['reference_ids'].split(';')
+                if reference_id
+            ],
+        })
+workflow_output=ROOT/'docs/assets/data/workflow.json'
+workflow_output.parent.mkdir(parents=True,exist_ok=True)
+workflow_output.write_text(json.dumps(workflow,indent=2,ensure_ascii=False)+'\n',encoding='utf-8')
+print(f'Built {len(methods)} method rows, {len(strategies)} strategy rows, and {len(workflow["nodes"])} workflow stages.')

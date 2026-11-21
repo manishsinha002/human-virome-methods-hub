@@ -1,0 +1,193 @@
+{
+  "nodes": [
+    {
+      "id": "design",
+      "label": "Question, specimen and controls",
+      "summary": "Start with the biological question and specimen. These choices constrain which viral fractions can be recovered and what a negative result can mean.",
+      "why_it_matters": "The observed virome reflects both biology and technical selection across collection, enrichment, extraction and sequencing.",
+      "outputs": "A defined target, specimen context, controls and sequencing strategy.",
+      "caveat": "A method-negative result does not establish biological absence when the target fraction may not have been recovered or the assay lacks sensitivity.",
+      "method_ids": [],
+      "review_sections": ["2", "2.5", "2.6", "4"],
+      "links": [
+        {"label": "Compare sequencing strategies", "url": "../strategies/"},
+        {"label": "Review specimen context", "url": "../specimens/"},
+        {"label": "Read the reporting checklist", "url": "../reporting-checklist/"}
+      ]
+    },
+    {
+      "id": "sample-prep",
+      "label": "Recovery and sequencing strategy",
+      "summary": "Choose total metagenomics, particle enrichment, metatranscriptomics, capture, or read-length strategy to match the target and specimen.",
+      "why_it_matters": "Enrichment, extraction and library preparation preferentially recover or exclude viral fractions; sequencing strategy is part of the measurement, not a neutral prelude.",
+      "outputs": "A documented laboratory protocol, expected viral fraction, read type and control plan.",
+      "caveat": "No single strategy captures all DNA and RNA viruses, intracellular and extracellular particles, or integrated elements equally well.",
+      "method_ids": [],
+      "review_sections": ["2.1", "2.2", "2.3", "2.4", "2.5", "2.6"],
+      "links": [
+        {"label": "Compare sequencing strategies", "url": "../strategies/"},
+        {"label": "Compare specimen considerations", "url": "../specimens/"},
+        {"label": "Review benchmarks and controls", "url": "../benchmarks/"}
+      ]
+    },
+    {
+      "id": "read-qc",
+      "label": "Read quality control",
+      "summary": "Inspect raw reads, adapters, base quality, duplicates and library-specific artifacts; retain an auditable record of filtering.",
+      "why_it_matters": "Low-quality or artifactual reads can increase computational load and contribute misleading taxonomic matches.",
+      "outputs": "Quality reports and documented raw-to-filtered read counts, with unfiltered data retained when permitted.",
+      "caveat": "Aggressive trimming or filtering can remove real viral signal. Apply thresholds consistently and report versions and parameters.",
+      "method_ids": [],
+      "review_sections": ["3.a", "4"],
+      "links": [
+        {"label": "fastp (external project)", "url": "https://github.com/OpenGene/fastp"},
+        {"label": "FastQC (external project)", "url": "https://www.bioinformatics.babraham.ac.uk/projects/fastqc/"},
+        {"label": "Explore broader virome tools (Awesome-Virome)", "url": "https://github.com/shandley/awesome-virome"}
+      ]
+    },
+    {
+      "id": "host-removal",
+      "label": "Human-read removal",
+      "summary": "Screen reads against an appropriate human reference when required for privacy, downstream efficiency or study design.",
+      "why_it_matters": "Reference choice, alignment settings and filtering policy change retained reads and can affect both privacy risk and viral recovery.",
+      "outputs": "Filtered reads, screening logs, reference/version details, and counts before and after removal.",
+      "caveat": "Host-like viral sequences may be removed, and residual human sequence may remain. Filtering is not itself proof of privacy or biological neutrality.",
+      "method_ids": ["M001", "M002", "M003", "M004", "M005", "M006"],
+      "review_sections": ["3.a"],
+      "links": [
+        {"label": "Human-read removal tools in the methods matrix", "url": "../methods/#human-read-removal"},
+        {"label": "Read the evidence standards", "url": "../evidence-standards/"}
+      ]
+    },
+    {
+      "id": "read-kmer",
+      "label": "K-mer and profile-based screening",
+      "summary": "Classify reads or estimate profiles against reference databases using k-mers, coverage filters or combined nucleotide and translated searches.",
+      "why_it_matters": "Read-based screening can detect low-abundance, reference-represented viruses even when reads do not assemble into contigs.",
+      "outputs": "Candidate taxonomic assignments or abundance profiles, together with the database, confidence and coverage metrics.",
+      "caveat": "Reference composition limits discovery. A few matching reads or an abundance estimate alone does not confirm a virus, recover a genome or establish infection.",
+      "method_ids": ["M007", "M008", "M022"],
+      "review_sections": ["3.b", "3.d"],
+      "links": [
+        {"label": "Read-based profiling tools in the methods matrix", "url": "../methods/#read-based-profiling"},
+        {"label": "Explore broader read-based tools (Awesome-Virome)", "url": "https://github.com/shandley/awesome-virome#virus-and-phage-identification"}
+      ]
+    },
+    {
+      "id": "read-mapping",
+      "label": "Reference mapping and recruitment",
+      "summary": "Recruit reads to candidate reference genomes or contigs, then inspect identity, breadth, depth, paired-read consistency and competing matches.",
+      "why_it_matters": "The mapping database and alignment thresholds determine which reads count as supporting a candidate and how abundance is estimated.",
+      "outputs": "Per-reference alignments, coverage breadth/depth and candidate-specific supporting-read evidence.",
+      "caveat": "A local match or narrow conserved region can be misleading. Competitive references, coverage distribution, controls and ambiguity from multi-mapping reads matter.",
+      "method_ids": ["M002", "M003", "M008"],
+      "review_sections": ["3.b", "3.d", "3.g"],
+      "links": [
+        {"label": "Explore read-mapping and profiling tools (Awesome-Virome)", "url": "https://github.com/shandley/awesome-virome#virus-and-phage-identification"},
+        {"label": "Review evidence standards", "url": "../evidence-standards/"}
+      ]
+    },
+    {
+      "id": "read-abundance",
+      "label": "Abundance and comparison",
+      "summary": "Estimate read support and compare samples only after defining normalization, multi-mapping policy, controls and the unit of analysis.",
+      "why_it_matters": "Mapping stringency, genome length normalization and ambiguous reads can materially change abundance estimates and cross-sample conclusions.",
+      "outputs": "A reproducible abundance table with normalization, denominator, database version and uncertainty/controls described.",
+      "caveat": "Relative abundance is not absolute viral load. Sequencing depth, enrichment efficiency, batch effects and contamination can mimic biological differences.",
+      "method_ids": ["M007", "M008", "M022"],
+      "review_sections": ["3.b", "3.i", "4", "5.c"],
+      "links": [
+        {"label": "Read the evidence standards", "url": "../evidence-standards/"},
+        {"label": "Use the reporting checklist", "url": "../reporting-checklist/"},
+        {"label": "Explore broader virome tools (Awesome-Virome)", "url": "https://github.com/shandley/awesome-virome"}
+      ]
+    },
+    {
+      "id": "assembly",
+      "label": "De novo assembly",
+      "summary": "Assemble quality-controlled reads into contigs to support candidate discovery and genome-level analysis.",
+      "why_it_matters": "Assembly provides sequence context beyond individual reads, but its yield depends on coverage, strain diversity, repeats and read technology.",
+      "outputs": "Contigs or assembled genomes plus assembly statistics, graph/read support and reproducible settings.",
+      "caveat": "Assembly alone does not prove a contig is viral, complete or non-chimeric. Preserve graph and read-level evidence for candidate review.",
+      "method_ids": ["M009", "M010", "M021"],
+      "review_sections": ["3.b", "3.c", "5.b"],
+      "links": [
+        {"label": "Assembly tools in the methods matrix", "url": "../methods/#assembly"},
+        {"label": "Explore genome assemblers (Awesome-Virome)", "url": "https://github.com/shandley/awesome-virome#genome-assembly"}
+      ]
+    },
+    {
+      "id": "viral-identification",
+      "label": "Viral-sequence identification",
+      "summary": "Assess contigs with complementary homology, hallmark-marker, sequence-composition and machine-learning evidence; combine signals where possible.",
+      "why_it_matters": "Each evidence class has different strengths. Current tools often combine them, and tool choice changes which candidates enter the observed virome.",
+      "outputs": "Candidate viral contigs with per-tool scores, supporting genes/alignments and method-specific uncertainty.",
+      "caveat": "No classifier score alone establishes a novel virus. Short contigs, plasmids, cellular sequences, database gaps and assembly artifacts can produce uncertain calls.",
+      "method_ids": ["M011", "M012", "M013", "M014"],
+      "review_sections": ["3.d", "3.e", "3.g"],
+      "links": [
+        {"label": "Viral-sequence identification tools in the methods matrix", "url": "../methods/#viral-sequence-identification"},
+        {"label": "Browse the broader identification catalogue (Awesome-Virome)", "url": "https://github.com/shandley/awesome-virome#virus-and-phage-identification"}
+      ]
+    },
+    {
+      "id": "genome-quality",
+      "label": "Genome quality and similarity",
+      "summary": "Assess completeness, contamination, read support and possible provirus boundaries; compare sufficiently supported genomes with explicit identity and coverage metrics.",
+      "why_it_matters": "Quality thresholds and genome-similarity rules affect which sequences are retained, dereplicated and interpreted as distinct.",
+      "outputs": "Quality estimates, boundary calls, pairwise similarity/ANI and clustering results with database and threshold versions.",
+      "caveat": "ANI is a genome/contig comparison concept, not read classification. Incomplete genomes, alignment fraction and reference coverage affect similarity; a cluster is not automatically a formal taxon.",
+      "method_ids": ["M015", "M016"],
+      "review_sections": ["3.c", "3.h", "5.b"],
+      "links": [
+        {"label": "Genome quality and clustering tools in the methods matrix", "url": "../methods/#genome-quality-and-clustering"},
+        {"label": "Explore broader genome-analysis tools (Awesome-Virome)", "url": "https://github.com/shandley/awesome-virome#genome-analysis"}
+      ]
+    },
+    {
+      "id": "taxonomy",
+      "label": "Taxonomy and genome context",
+      "summary": "Assign taxonomy using sequence similarity, genome-wide relationships, hallmark genes and curated taxonomic references appropriate to the viral group.",
+      "why_it_matters": "Taxonomic resolution depends on reference diversity, genome completeness and the classification system; methods may disagree or stop above species level.",
+      "outputs": "Taxonomic assignments and their supporting identity, coverage, gene-content or genome-context evidence.",
+      "caveat": "Do not equate one nearest database match or clustering threshold with a formally established species or biological equivalence.",
+      "method_ids": ["M008", "M011", "M016"],
+      "review_sections": ["3.d", "3.h", "4"],
+      "links": [
+        {"label": "Explore viral taxonomy tools (Awesome-Virome)", "url": "https://github.com/shandley/awesome-virome#taxonomy"},
+        {"label": "Review evidence standards", "url": "../evidence-standards/"}
+      ]
+    },
+    {
+      "id": "host-function",
+      "label": "Host and functional hypotheses",
+      "summary": "Predict virus–host links and annotate genes with sequence, marker, structure or model-based evidence; prioritize consequential claims for orthogonal validation.",
+      "why_it_matters": "Host predictions and viral protein annotations extend interpretation beyond sequence detection, but each depends on reference coverage, model domain and contextual evidence.",
+      "outputs": "Host-link predictions, gene annotations and structure/function hypotheses with confidence, evidence source and database/model versions.",
+      "caveat": "Predictions do not prove infection, host range, activity or experimentally validated function. Structure similarity (including Foldseek) and predicted structure (including AlphaFold) generate hypotheses, not functional confirmation.",
+      "method_ids": ["M017", "M018", "M019", "M020", "M023"],
+      "review_sections": ["3.f", "3.h", "5.d", "5.e"],
+      "links": [
+        {"label": "Host and functional interpretation tools in the methods matrix", "url": "../methods/#virus-host-and-functional-interpretation"},
+        {"label": "Explore host-prediction tools (Awesome-Virome)", "url": "https://github.com/shandley/awesome-virome#host-prediction"},
+        {"label": "Explore viral genome annotation tools (Awesome-Virome)", "url": "https://github.com/shandley/awesome-virome#genome-analysis"}
+      ]
+    },
+    {
+      "id": "validation-reporting",
+      "label": "Validation and reporting",
+      "summary": "Use negative and positive controls, quantitative standards and orthogonal evidence to evaluate key findings; report enough detail for reproducibility.",
+      "why_it_matters": "Low-biomass contamination, database versions and undocumented thresholds can otherwise be mistaken for biological signal or prevent cross-study comparison.",
+      "outputs": "Validated or explicitly provisional claims; controls; parameters; software/database versions; and traceable intermediate results.",
+      "caveat": "Keep claim strength proportional to the evidence: detection, genome recovery, activity, host linkage and function are distinct conclusions.",
+      "method_ids": [],
+      "review_sections": ["2.6", "3.g", "4", "5.e", "6"],
+      "links": [
+        {"label": "Evidence standards", "url": "../evidence-standards/"},
+        {"label": "Reporting checklist", "url": "../reporting-checklist/"},
+        {"label": "Benchmarks and controls", "url": "../benchmarks/"},
+        {"label": "Workflow reproducibility guidance (nf-core)", "url": "https://nf-co.re/docs"}
+      ]
+    }
+  ]
+}
